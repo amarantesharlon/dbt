@@ -1,0 +1,6 @@
+kind: "Dependencies"
+body: "Update dbt-semantic-interfaces requirement from ~=0.3.0 to >=0.3,<0.5 in /core"
+time: 2023-10-27T00:14:04.00000Z
+custom:
+  Author: dependabot[bot]
+  PR: 8932
