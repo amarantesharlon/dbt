@@ -11,11 +11,11 @@ from dbt_common.dataclass_schema import ValidationError
 class SnapshotConfig(NodeConfig):
     materialized: str = "snapshot"
     strategy: Optional[str] = None
-    unique_key: Optional[str] = None
     target_schema: Optional[str] = None
     target_database: Optional[str] = None
     updated_at: Optional[str] = None
     # Not using Optional because of serialization issues with a Union of str and List[str]
+    unique_key: Union[str, List[str], None] = None
     check_cols: Union[str, List[str], None] = None
 
     def final_validate(self):
