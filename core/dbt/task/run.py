@@ -1,5 +1,4 @@
 import functools
-import os
 import threading
 from copy import deepcopy
 from datetime import datetime
@@ -32,6 +31,7 @@ from dbt.events.types import (
     RunningOperationCaughtError,
 )
 from dbt.exceptions import CompilationError, DbtInternalError, DbtRuntimeError
+from dbt.flags import get_flags
 from dbt.graph import ResourceTypeSelector
 from dbt.hooks import get_hook_dict
 from dbt.materializations.incremental.microbatch import MicrobatchBuilder
@@ -455,9 +455,8 @@ class ModelRunner(CompileRunner):
             )
 
         hook_ctx = self.adapter.pre_model_hook(context_config)
-
         if (
-            os.environ.get("DBT_EXPERIMENTAL_MICROBATCH")
+            get_flags().require_builtin_microbatch_strategy
             and model.config.materialized == "incremental"
             and model.config.incremental_strategy == "microbatch"
         ):
