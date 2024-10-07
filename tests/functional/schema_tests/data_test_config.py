@@ -35,9 +35,10 @@ class TestCustomDataTestConfig(BaseDataTestsConfig):
         return {"table.sql": table_sql, "custom_config.yml": custom_config_yml}
 
     def test_custom_config(self, project):
-        run_dbt(["parse"])
-        manifest = get_manifest(project.project_root)
+        run_dbt(["run"])
+        run_dbt(["test"], expect_pass=False)
 
+        manifest = get_manifest(project.project_root)
         # Pattern to match the test_id without the specific suffix
         pattern = re.compile(r"test\.test\.accepted_values_table_color__blue__red\.\d+")
 

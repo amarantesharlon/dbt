@@ -1327,7 +1327,7 @@ id,color,value
 8,green,80
 9,yellow,90
 10,blue,100
-"""
+""".strip()
 
 table_sql = """
 -- content of the table.sql
